@@ -1,6 +1,6 @@
 package com.qjp.rabbitmq.study.service.impl;
 
-import com.qjp.rabbitmq.study.constant.RabbitMQConstant;
+import com.qjp.rabbitmq.study.constant.RabbitConstant;
 import com.qjp.rabbitmq.study.service.SendRabbitMQService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,7 @@ public class SendRabbitMQServiceImpl implements SendRabbitMQService {
             map.put("msgId", msgId);
             map.put("sendTime", sendTime);
             map.put("msg", msg);
-            rabbitTemplate.convertAndSend(RabbitMQConstant.RABBITMQ_DEMO_DIRECT_EXCHANGE, RabbitMQConstant.RABBITMQ_DEMO_DIRECT_ROUTING, map);
+            rabbitTemplate.convertAndSend(RabbitConstant.RABBITMQ_DEMO_DIRECT_EXCHANGE, RabbitConstant.RABBITMQ_DEMO_DIRECT_ROUTING, map);
             return "ok";
         } catch (Exception e) {
             logger.error("出现异常：", e);
