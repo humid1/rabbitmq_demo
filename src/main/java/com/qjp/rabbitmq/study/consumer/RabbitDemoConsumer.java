@@ -19,6 +19,6 @@ import java.util.Map;
 public class RabbitDemoConsumer {
     @RabbitHandler
     public void process(Map map) {
-        System.out.println("消费者收到的消息：" +  map);
+        System.out.println("【direct】消费者收到的消息：" +  map);
     }
 }
