@@ -33,7 +33,7 @@ public class SendRabbitMQServiceImpl implements SendRabbitMQService {
     private RabbitTemplate rabbitTemplate;
 
     @Override
-    public String sendMsg(String msg) {
+    public String sendDirectMsg(String msg) {
         try {
             String msgId = UUID.randomUUID().toString().replace("-", "").substring(0, 32);
             String sendTime = sdf.format(new Date());
@@ -47,5 +47,10 @@ public class SendRabbitMQServiceImpl implements SendRabbitMQService {
             logger.error("出现异常：", e);
             return "error";
         }
+    }
+
+    @Override
+    public String sendFanoutMsg(String msg) {
+        return null;
     }
 }

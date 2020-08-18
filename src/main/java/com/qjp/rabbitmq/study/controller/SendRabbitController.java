@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author: qiujianping
@@ -23,7 +25,15 @@ public class SendRabbitController {
      * 发送消息
      */
     @PostMapping("/sendMsg")
-    public String sendMsg(@RequestParam(name = "msg") String msg) {
-        return sendRabbitMQService.sendMsg(msg);
+    public Object sendDirectMsg(@RequestParam(name = "msg") String msg) {
+        Map<String, String> map = new HashMap<>();
+        String msg1 = sendRabbitMQService.sendDirectMsg(msg);
+        if("ok".equals(msg1)) {
+            map.put("code","0");
+        } else {
+            map.put("code", "1");
+        }
+        map.put("msg", msg1);
+        return map;
     }
 }

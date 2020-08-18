@@ -7,6 +7,7 @@ package com.qjp.rabbitmq.study.service;
  */
 public interface SendRabbitMQService {
 
-    String sendMsg(String msg);
+    String sendDirectMsg(String msg);
 
+    String sendFanoutMsg(String msg);
 }
