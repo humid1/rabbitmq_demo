@@ -18,6 +18,6 @@ import java.util.Map;
 public class FanoutExchangeConsumerA {
     @RabbitHandler
     public void process(Map<String, Object> map) {
-        System.out.println("【fanout】队列B 接收到的消息：" + map);
+        System.out.println("【fanout】队列A 接收到的消息：" + map);
     }
 }
