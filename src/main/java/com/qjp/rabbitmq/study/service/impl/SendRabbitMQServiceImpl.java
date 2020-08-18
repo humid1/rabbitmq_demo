@@ -35,22 +35,34 @@ public class SendRabbitMQServiceImpl implements SendRabbitMQService {
     @Override
     public String sendDirectMsg(String msg) {
         try {
-            String msgId = UUID.randomUUID().toString().replace("-", "").substring(0, 32);
-            String sendTime = sdf.format(new Date());
-            Map<String, Object> map = new HashMap<>();
-            map.put("msgId", msgId);
-            map.put("sendTime", sendTime);
-            map.put("msg", msg);
+            Map<String, Object> map = getMessage(msg);
             rabbitTemplate.convertAndSend(RabbitConstant.RABBITMQ_DEMO_DIRECT_EXCHANGE, RabbitConstant.RABBITMQ_DEMO_DIRECT_ROUTING, map);
-            return "ok";
+            return "success";
         } catch (Exception e) {
             logger.error("出现异常：", e);
-            return "error";
+            return e.getMessage();
         }
     }
 
     @Override
     public String sendFanoutMsg(String msg) {
-        return null;
+        try {
+            Map<String, Object> map = getMessage(msg);
+            rabbitTemplate.convertAndSend(RabbitConstant.FANOUT_EXCHANGE_DEMO_NAME, "", map);
+            return "success";
+        } catch (Exception e) {
+            logger.error("出现异常：", e);
+            return e.getMessage();
+        }
+    }
+
+    private Map<String, Object> getMessage(String msg) {
+        String msgId = UUID.randomUUID().toString().replace("-", "").substring(0, 32);
+        String sendTime = sdf.format(new Date());
+        Map<String, Object> map = new HashMap<>();
+        map.put("msgId", msgId);
+        map.put("sendTime", sendTime);
+        map.put("msg", msg);
+        return map;
     }
 }

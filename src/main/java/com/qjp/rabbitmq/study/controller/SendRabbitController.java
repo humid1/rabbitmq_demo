@@ -22,18 +22,34 @@ public class SendRabbitController {
     private SendRabbitMQService sendRabbitMQService;
 
     /**
-     * 发送消息
+     * 发送消息 (direct模式,匹配路由key)
      */
-    @PostMapping("/sendMsg")
+    @PostMapping("/sendDirectMsg")
     public Object sendDirectMsg(@RequestParam(name = "msg") String msg) {
-        Map<String, String> map = new HashMap<>();
         String msg1 = sendRabbitMQService.sendDirectMsg(msg);
-        if("ok".equals(msg1)) {
+        return getMsg(msg1);
+    }
+
+    /**
+     *
+     * @param msg
+     * @return 发送消息 (fanout模式，广播模式）
+     */
+    @PostMapping("/sendDirectMsg")
+    public Object sendFanoutMsg(@RequestParam(name = "msg") String msg) {
+        String msg1 = sendRabbitMQService.sendFanoutMsg(msg);
+        return getMsg(msg1);
+    }
+
+
+    private Object getMsg(String msg) {
+        Map<String, String> map = new HashMap<>();
+        if("ok".equals(msg)) {
             map.put("code","0");
         } else {
             map.put("code", "1");
         }
-        map.put("msg", msg1);
+        map.put("msg", msg);
         return map;
     }
 }
