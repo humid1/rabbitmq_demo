@@ -51,4 +51,5 @@ public class RabbitConstant {
     public static final String TOPIC_QUEUE_B = "topic.queue.b";
 
     public static final String TOPIC_QUEUE_C = "topic.queue.c";
+
 }
