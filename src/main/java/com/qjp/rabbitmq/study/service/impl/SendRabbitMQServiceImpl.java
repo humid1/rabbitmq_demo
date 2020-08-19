@@ -56,6 +56,18 @@ public class SendRabbitMQServiceImpl implements SendRabbitMQService {
         }
     }
 
+    @Override
+    public String sendTopicMsg(String msg, String routerKey) {
+        try {
+            Map<String, Object> map = getMessage(msg);
+            rabbitTemplate.convertAndSend(RabbitConstant.TOPIC_EXCHANGE_DEMO, routerKey, map);
+            return "success";
+        } catch (Exception e) {
+            logger.error("出现异常：", e);
+            return e.getMessage();
+        }
+    }
+
     private Map<String, Object> getMessage(String msg) {
         String msgId = UUID.randomUUID().toString().replace("-", "").substring(0, 32);
         String sendTime = sdf.format(new Date());

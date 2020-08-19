@@ -10,4 +10,6 @@ public interface SendRabbitMQService {
     String sendDirectMsg(String msg);
 
     String sendFanoutMsg(String msg);
+
+    String sendTopicMsg(String msg, String routerKey);
 }

@@ -25,9 +25,14 @@ public class SendRabbitController {
     @Resource
     private SendRabbitMQService sendRabbitMQService;
 
-    /**
-     * 发送消息 (direct模式,匹配路由key)
-     */
+    @ApiOperation(value = "topic模式,通配符匹配路由key")
+    @PostMapping("/sendTopicMsg")
+    public Object sendTopicMsg(@ApiParam(name = "msg", value = "发送的消息") @RequestParam(name = "msg") String msg,
+                               @ApiParam(name = "routerKey", value = "路由key(a.xxx或rabbit.xxx)") @RequestParam(name = "routerKey") String routerKey) {
+        String msg1 = sendRabbitMQService.sendTopicMsg(msg, routerKey);
+        return getMsg(msg1);
+    }
+
     @ApiOperation(value = "direct模式,匹配路由key")
     @PostMapping("/sendDirectMsg")
     public Object sendDirectMsg(@ApiParam(name = "msg", value = "发送的消息") @RequestParam(name = "msg") String msg) {
@@ -35,11 +40,6 @@ public class SendRabbitController {
         return getMsg(msg1);
     }
 
-    /**
-     *
-     * @param msg
-     * @return 发送消息 (fanout模式，广播模式）
-     */
     @ApiOperation(value = "fanout模式，广播模式")
     @PostMapping("/sendFanoutMsg")
     public Object sendFanoutMsg(@ApiParam(name = "msg", value = "发送的消息") @RequestParam(name = "msg") String msg) {
