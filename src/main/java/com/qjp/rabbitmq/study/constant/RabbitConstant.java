@@ -35,4 +35,20 @@ public class RabbitConstant {
      * 交换机名称
      */
     public static final String FANOUT_EXCHANGE_DEMO_NAME = "fanout.exchange.demo";
+
+    /**
+     * topic_exchange 交换机类型：这种交换机是使用通配符去匹配，路由到对应的队列。通配符有两种："*" 、 "#"。需要注意的是通配符前面必须要加上"."符号。
+     *  * 符号：有且只匹配一个词。比如 a.*可以匹配到"a.b"、"a.c"，但是匹配不了"a.b.c"。
+     *  # 符号：匹配一个或多个词。比如"rabbit.#"既可以匹配到"rabbit.a.b"、"rabbit.a"，也可以匹配到"rabbit.a.b.c"
+     */
+    public static final String TOPIC_EXCHANGE_DEMO = "topic.exchange.demo";
+
+    /**
+     * 队列名称
+     */
+    public static final String TOPIC_QUEUE_A = "topic.queue.a";
+
+    public static final String TOPIC_QUEUE_B = "topic.queue.b";
+
+    public static final String TOPIC_QUEUE_C = "topic.queue.c";
 }
