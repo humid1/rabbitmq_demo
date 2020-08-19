@@ -18,7 +18,7 @@ import java.util.Map;
  * @Date: Created in 2020/8/17 11:40
  * @Description:
  */
-@Api("RabbitMQ Demo Api 生产者接口")
+@Api(tags = "RabbitMQ Demo Api 生产者接口")
 @RestController
 @RequestMapping("/rabbitmq")
 public class SendRabbitController {
