@@ -1,5 +1,6 @@
 package com.qjp.rabbitmq.study.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qjp.rabbitmq.study.service.SendRabbitMQService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +26,16 @@ import java.util.Map;
 public class SendRabbitController {
     @Resource
     private SendRabbitMQService sendRabbitMQService;
+
+    @ApiOperation(value = "headers模式,全部匹配和部分匹配")
+    @PostMapping("/sendHeadersMsg")
+    public Object sendHeadersMsg(@ApiParam(name = "msg", value = "发送的消息") @RequestParam(name = "msg") String msg,
+                               @ApiParam(name = "json", value = "路由json (示例：{\"key_one\":\"java\",\"key_two\":\"rabbit\"} 或者 {\"headers_A\":\"code\"} 或者 {\"headers_B\":\"sky\"})") @RequestParam(name = "json") String json) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(json, Map.class);
+        String msg1 = sendRabbitMQService.sendHeadersMsg(msg, map);
+        return getMsg(msg1);
+    }
 
     @ApiOperation(value = "topic模式,通配符匹配路由key")
     @PostMapping("/sendTopicMsg")

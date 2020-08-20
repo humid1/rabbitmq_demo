@@ -1,5 +1,7 @@
 package com.qjp.rabbitmq.study.service;
 
+import java.util.Map;
+
 /**
  * @Author: qiujianping
  * @Date: Created in 2020/8/17 11:29
@@ -12,4 +14,6 @@ public interface SendRabbitMQService {
     String sendFanoutMsg(String msg);
 
     String sendTopicMsg(String msg, String routerKey);
+
+    String sendHeadersMsg(String msg, Map<String, Object> map);
 }

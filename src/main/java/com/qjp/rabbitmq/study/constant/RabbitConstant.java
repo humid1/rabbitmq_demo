@@ -52,4 +52,16 @@ public class RabbitConstant {
 
     public static final String TOPIC_QUEUE_C = "topic.queue.c";
 
+    /**
+     * Headers Exchange ：创建队列需要设置绑定的头部信息，有两种模式：全部匹配和部分匹配。
+     * 交换机会根据生产者发送过来的头部信息携带的键值去匹配队列绑定的键值，路由到对应的队列。
+     */
+    public static final String HEADERS_EXCHANGE_DEMO = "headers.exchange.demo";
+
+    /**
+     * 队列名称
+     */
+    public static final String HEADERS_EXCHANGE_QUEUE_A = "headers.demo.a";
+
+    public static final String HEADERS_EXCHANGE_QUEUE_B = "headers.demo.b";
 }

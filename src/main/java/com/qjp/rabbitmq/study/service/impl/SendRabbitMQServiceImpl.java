@@ -4,6 +4,9 @@ import com.qjp.rabbitmq.study.constant.RabbitConstant;
 import com.qjp.rabbitmq.study.service.SendRabbitMQService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Message;
+import org.springframework.amqp.core.MessageDeliveryMode;
+import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +64,24 @@ public class SendRabbitMQServiceImpl implements SendRabbitMQService {
         try {
             Map<String, Object> map = getMessage(msg);
             rabbitTemplate.convertAndSend(RabbitConstant.TOPIC_EXCHANGE_DEMO, routerKey, map);
+            return "success";
+        } catch (Exception e) {
+            logger.error("出现异常：", e);
+            return e.getMessage();
+        }
+    }
+
+    @Override
+    public String sendHeadersMsg(String msg, Map<String, Object> map) {
+        try {
+            MessageProperties messageProperties = new MessageProperties();
+            // 消息持久化
+            messageProperties.setDeliveryMode(MessageDeliveryMode.PERSISTENT);
+            messageProperties.setContentType("UTF-8");
+            // 添加消息
+            messageProperties.getHeaders().putAll(map);
+            Message message = new Message(msg.getBytes(), messageProperties);
+            rabbitTemplate.convertAndSend(RabbitConstant.HEADERS_EXCHANGE_DEMO, null, message);
             return "success";
         } catch (Exception e) {
             logger.error("出现异常：", e);

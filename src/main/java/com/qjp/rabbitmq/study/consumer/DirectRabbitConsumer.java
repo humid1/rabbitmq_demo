@@ -16,7 +16,7 @@ import java.util.Map;
 @Component
 //使用queuesToDeclare属性，如果不存在则会创建队列
 @RabbitListener(queuesToDeclare  = @Queue(RabbitConstant.RABBITMQ_DEMO_TOPIC))
-public class RabbitDemoConsumer {
+public class DirectRabbitConsumer {
     @RabbitHandler
     public void process(Map map) {
         System.out.println("【direct】消费者收到的消息：" +  map);
