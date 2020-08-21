@@ -8,6 +8,7 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @Author: qiujianping
@@ -15,6 +16,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  * @Description:
  */
 @Configuration
+@EnableSwagger2
 public class Swagger2Configuration {
     @Bean
     public Docket createRestApi() {
@@ -28,7 +30,7 @@ public class Swagger2Configuration {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("RabbitMQ Demo Api 文档")
+                .title("RabbitMQ Demo Api 入门基础文档")
                 .description("RabbitMQ Demo API 网关接口，http://127.0.0.1:8080")
                 .termsOfServiceUrl("https://github.com/humid1/rabbitmq_demo")
                 .version("1.0.0")

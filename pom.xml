@@ -79,6 +79,7 @@
 
     <modules>
         <module>demo01</module>
+        <module>base</module>
     </modules>
 
 </project>
