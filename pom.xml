@@ -78,8 +78,8 @@
     </build>
 
     <modules>
-        <module>demo01</module>
         <module>base</module>
+        <module>demo01</module>
     </modules>
 
 </project>
