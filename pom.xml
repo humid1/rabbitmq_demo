@@ -78,7 +78,7 @@
     </build>
 
     <modules>
-        <module>base</module>
+        <module>demo03-deadmq</module>
         <module>demo01</module>
     </modules>
 
