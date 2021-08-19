@@ -1,0 +1,7 @@
+server:
+  port: 8090
+# 配置mongoDB
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/webflux

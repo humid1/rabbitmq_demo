@@ -22,14 +22,8 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
-
         <!-- Swagger2 Begin -->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -80,6 +74,9 @@
     <modules>
         <module>demo03-deadmq</module>
         <module>demo01</module>
+        <module>demo04-webflux</module>
+        <module>demo05-RouterFunction</module>
+        <module>demo06-webflux-client</module>
     </modules>
 
 </project>
